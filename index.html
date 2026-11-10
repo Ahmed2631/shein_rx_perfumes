@@ -42,9 +42,20 @@
     };
   </script>
   <style>
-    body {
+    html, body {
       font-family: 'Cairo', 'Inter', sans-serif;
       transition: background-color 0.25s ease, color 0.25s ease;
+      overflow-x: hidden;
+      max-width: 100vw;
+      -webkit-tap-highlight-color: transparent;
+    }
+    @media (max-width: 640px) {
+      .responsive-table-wrap {
+        margin-left: -0.75rem;
+        margin-right: -0.75rem;
+        padding-left: 0.75rem;
+        padding-right: 0.75rem;
+      }
     }
     /* Geometric Arabesque Luxury Pattern inspired by Dawoud Perfume tinted in SHEIN Rx Rose Gold */
     .rx-geometric-bg {
@@ -100,8 +111,10 @@
 </head>
 <body class="rx-geometric-bg text-rx-900 dark:text-rx-50 min-h-screen flex flex-col selection:bg-rx-600 selection:text-white">
 
+  <!-- UNIFIED STICKY TOP WRAPPER FOR ALL SCREEN SIZES -->
+  <div class="sticky top-0 z-40 w-full">
   <!-- TOP FREE SHIPPING PROGRESS BAR (Matches Dawoud Perfume reference screenshot) -->
-  <div class="rx-topbar-pattern text-rx-100 text-xs sm:text-sm py-2.5 px-4 border-b border-rx-700/60 sticky top-0 z-40 shadow-sm">
+  <div class="rx-topbar-pattern text-rx-100 text-[11px] sm:text-sm py-2 px-3 sm:px-4 border-b border-rx-700/60 shadow-sm">
     <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2">
       <div class="flex items-center gap-2 font-medium text-center sm:text-start w-full sm:w-auto justify-center sm:justify-start">
         <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-rx-600 text-white text-xs">🚚</span>
@@ -124,11 +137,11 @@
   </div>
 
   <!-- MAIN NAVIGATION HEADER (Matches Dawoud Perfume header layout + SHEIN Rx Rose-Gold Branding) -->
-  <header class="bg-[#EFE5E7]/95 dark:bg-rx-900/95 backdrop-blur-md border-b border-rx-200 dark:border-rx-800 sticky top-[41px] z-30 transition-colors">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 h-20 flex items-center justify-between gap-3">
+  <header class="bg-[#EFE5E7]/95 dark:bg-rx-900/95 backdrop-blur-md border-b border-rx-200 dark:border-rx-800 transition-colors">
+    <div class="max-w-7xl mx-auto px-2.5 sm:px-6 min-h-[4.25rem] sm:h-20 py-1.5 sm:py-0 flex items-center justify-between gap-1.5 sm:gap-3">
 
       <!-- Left Controls Cluster (Cart, Search, Dark Mode, Language, Admin Switch) -->
-      <div class="flex items-center gap-2 sm:gap-3">
+      <div class="flex items-center gap-1 sm:gap-2.5 shrink-0">
         <!-- Cart Icon with Counter -->
         <button type="button" onclick="toggleCartDrawer(true)" class="relative flex items-center gap-1.5 px-2.5 py-2 rounded-lg hover:bg-rx-200/60 dark:hover:bg-rx-800 transition" title="سلة التسوق">
           <span id="headerCartCount" class="font-bold text-sm text-rx-700 dark:text-rx-200">0</span>
@@ -158,7 +171,7 @@
         </button>
 
         <!-- Auth & Role Switcher (Sign in/up -> Dashboard for Admin | Sign out for regular User) -->
-        <button type="button" onclick="handleAuthOrPortalClick()" id="headerPortalBtn" class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-rx-600 hover:bg-rx-700 text-white text-xs sm:text-sm font-semibold shadow-sm transition">
+        <button type="button" onclick="handleAuthOrPortalClick()" id="headerPortalBtn" class="flex items-center gap-1 sm:gap-1.5 px-2 sm:px-3 py-1.5 rounded-lg bg-rx-600 hover:bg-rx-700 text-white text-[11px] sm:text-sm font-semibold shadow-sm transition whitespace-nowrap">
           <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
           </svg>
@@ -172,7 +185,7 @@
       <!-- Center Brand Logo (SHEIN Rx Official Logo from Zikola.zip) -->
       <div class="flex items-center justify-center">
         <button type="button" onclick="resetStorefrontHome()" class="flex items-center gap-2.5 group focus:outline-none">
-          <img src="data:image/jpeg;base64,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VVzfardBSUzKp0T5T4ZnEeAWtGeQV9LttTW1LZjW0QpHNk2sb4gfubgc5Hrn7L5nbLJqGy+1O66hdYq2ot1V4jWOidHnkMAOC8fpK+gw3i4VNfTQR2SrhgfuM89QWtEYAOAACS4k4HolWfVzFpia67QpWpbuYvarbLc6R21/u5a3tnc4/wCFZ79a6W/Xd9snLmPdQ+LHKz8UThJgOH3+o4VQ1Npi/VvtdtV8pbXPJbabwWyzh7APh3ZIBdn8w7eavXgTHWDan3ObwW0Jh94yNm4yB23Gc9vJIjvtct41SazzFVL0dqOs0tfptL6hqAC548BxacZJ4LT+h37H6q66UgMOn4onYHxzdPIyvP8AlcmttKDUdC2Slc2C5U3xU82Puw+hx9Dgrt0zHW0+naSOugfFVMjIfHwXZycdDjJGO6RuOGM965K9ccW8x/1RdC6q/htJdj7jJLRURG98GC6JoLhuLepbx1GccqY0faIrtepdXGSJomL/AAoI8ksc4AOLyQMnAwABjvkqK9kemL5YbjfZL3b5oBWljo3ucxzXAOfxgE44cF5XyovHswvzboxstVpR/wAMsUMe51MD54/T1ae4+E9lI409WWa3yXrjnmYj78dlk9oeo77pSkiulup6aqoGkMqWPYd8RJ4eDkAt7HyJB6ZXbpu+1mo6mouFO+E2QhjaZxjIkkft+PJzjaDx06g+S8brWx6ut9JSWtra20XMf8TXROY6NsGOW9c7nfh6cZ9FCezay6j0hW11iraV09lErn0VUC0bRn8wzn4h6dQfNa8vJFazineotH+v7fQz0K2WMZWVXlEREBERAREQEREAhctfVighE743PjBw7ZyRnocd+cD6rqWskbZWlr2hzT1BQcjLlH4zIJI3slOGuxy1ry3dtz54R12p/CbI1skm7w9oa3k7/wAK9jRwGpFSYWGYDAfjlaQ26kpwRFTRMBcHnA7jp9kGauokhbEIY2vfK/YA920DgnPAPkuZl7p2+7CVrmPqDtAGHBrt23r8+MrsqKaGqjDJow9oOQD2K83W6kc+J5poswgCP4fw45GPkg8/4iwOblh27ZnEjkjYQDwvYVcb6aSeP42sBII6OwOy292jA+BoY74sOaBlu45JH15WKekipaVlNGwCJjdgb6IOSK6kMJqYAx+2NzWxu3bt5w0c45yF6su0EksEYbJmcHaS3ABBwQc98g8DK2ZbKOOF8DaaMRvxuGOuOnPp28lsLfStMJEEY8EYjwPw/JBpQ3SnuO805cQzHJbgEHOCPsV5zXiKOKocyKV5hZI8DGBJs4cAfQ8LpgpIKbf4MbWbzk481q230ofK8U8e6YESHH4gev3QYmqJoaHxxTmSbaCY2+Z6+vH34XhFc2TmGLwTJ40T5C6P4mDaQCOcHqcYx812zwR1ERilYHsOMgrzbQ07PCLImMMIIjIHLQeuEEJT23TgqoqmjtFC180uHStgaznYX54HJ45/9KXt9yguUbnwF5a3HLm4yCMghbUtvgpYI4mM3eG5zw53J3HJLvmcn7r0pqSGkaWQxtjaTnDeiLMzPd7BEREEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREH//Z" alt="SHEIN Rx Logo" class="w-14 h-14 sm:w-16 sm:h-16 rounded-full object-cover border-2 border-rx-400 shadow-md group-hover:scale-105 transition-transform" />
+          <img src="data:image/jpeg;base64,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VVzfardBSUzKp0T5T4ZnEeAWtGeQV9LttTW1LZjW0QpHNk2sb4gfubgc5Hrn7L5nbLJqGy+1O66hdYq2ot1V4jWOidHnkMAOC8fpK+gw3i4VNfTQR2SrhgfuM89QWtEYAOAACS4k4HolWfVzFpia67QpWpbuYvarbLc6R21/u5a3tnc4/wCFZ79a6W/Xd9snLmPdQ+LHKz8UThJgOH3+o4VQ1Npi/VvtdtV8pbXPJbabwWyzh7APh3ZIBdn8w7eavXgTHWDan3ObwW0Jh94yNm4yB23Gc9vJIjvtct41SazzFVL0dqOs0tfptL6hqAC548BxacZJ4LT+h37H6q66UgMOn4onYHxzdPIyvP8AlcmttKDUdC2Slc2C5U3xU82Puw+hx9Dgrt0zHW0+naSOugfFVMjIfHwXZycdDjJGO6RuOGM965K9ccW8x/1RdC6q/htJdj7jJLRURG98GC6JoLhuLepbx1GccqY0faIrtepdXGSJomL/AAoI8ksc4AOLyQMnAwABjvkqK9kemL5YbjfZL3b5oBWljo3ucxzXAOfxgE44cF5XyovHswvzboxstVpR/wAMsUMe51MD54/T1ae4+E9lI409WWa3yXrjnmYj78dlk9oeo77pSkiulup6aqoGkMqWPYd8RJ4eDkAt7HyJB6ZXbpu+1mo6mouFO+E2QhjaZxjIkkft+PJzjaDx06g+S8brWx6ut9JSWtra20XMf8TXROY6NsGOW9c7nfh6cZ9FCezay6j0hW11iraV09lErn0VUC0bRn8wzn4h6dQfNa8vJFazineotH+v7fQz0K2WMZWVXlEREBERAREQEREAhctfVighE743PjBw7ZyRnocd+cD6rqWskbZWlr2hzT1BQcjLlH4zIJI3slOGuxy1ry3dtz54R12p/CbI1skm7w9oa3k7/wAK9jRwGpFSYWGYDAfjlaQ26kpwRFTRMBcHnA7jp9kGauokhbEIY2vfK/YA920DgnPAPkuZl7p2+7CVrmPqDtAGHBrt23r8+MrsqKaGqjDJow9oOQD2K83W6kc+J5poswgCP4fw45GPkg8/4iwOblh27ZnEjkjYQDwvYVcb6aSeP42sBII6OwOy292jA+BoY74sOaBlu45JH15WKekipaVlNGwCJjdgb6IOSK6kMJqYAx+2NzWxu3bt5w0c45yF6su0EksEYbJmcHaS3ABBwQc98g8DK2ZbKOOF8DaaMRvxuGOuOnPp28lsLfStMJEEY8EYjwPw/JBpQ3SnuO805cQzHJbgEHOCPsV5zXiKOKocyKV5hZI8DGBJs4cAfQ8LpgpIKbf4MbWbzk481q230ofK8U8e6YESHH4gev3QYmqJoaHxxTmSbaCY2+Z6+vH34XhFc2TmGLwTJ40T5C6P4mDaQCOcHqcYx812zwR1ERilYHsOMgrzbQ07PCLImMMIIjIHLQeuEEJT23TgqoqmjtFC180uHStgaznYX54HJ45/9KXt9yguUbnwF5a3HLm4yCMghbUtvgpYI4mM3eG5zw53J3HJLvmcn7r0pqSGkaWQxtjaTnDeiLMzPd7BEREEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREH//Z" alt="SHEIN Rx Logo" class="w-11 h-11 sm:w-16 sm:h-16 rounded-full object-cover border-2 border-rx-400 shadow-md group-hover:scale-105 transition-transform shrink-0" />
           <div class="text-start hidden sm:block">
             <div class="font-serif text-xl sm:text-2xl font-bold tracking-wider text-rx-700 dark:text-rx-300 leading-none">SHEIN Rx</div>
             <div id="brandTaglineHeader" class="text-[11px] text-rx-600 dark:text-rx-400 font-medium mt-0.5">Your Daily Dose of Style</div>
@@ -190,7 +203,7 @@
         </nav>
 
         <!-- Submenu Drawer Trigger Button -->
-        <button type="button" onclick="toggleSubmenuDrawer(true)" class="flex items-center gap-2 px-3 py-2 rounded-lg bg-white/90 dark:bg-rx-800 border border-rx-300 dark:border-rx-700 text-rx-800 dark:text-rx-100 hover:bg-rx-100 transition shadow-sm" title="فتح القائمة الجانبية">
+        <button type="button" onclick="toggleSubmenuDrawer(true)" class="flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3 py-1.5 sm:py-2 rounded-lg bg-white/90 dark:bg-rx-800 border border-rx-300 dark:border-rx-700 text-rx-800 dark:text-rx-100 hover:bg-rx-100 transition shadow-sm shrink-0" title="فتح القائمة الجانبية">
           <span class="text-xs sm:text-sm font-bold" id="submenuBtnLabel">القائمة</span>
           <svg class="w-5 h-5 text-rx-600 dark:text-rx-300" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
@@ -208,12 +221,13 @@
       </div>
     </div>
   </header>
+  </div>
 
   <!-- ===================================================================== -->
   <!-- ATTACHED SUBMENU DRAWER (Exact replica of image_ff7ad7.jpg in SHEIN Rx) -->
   <!-- ===================================================================== -->
   <div id="submenuBackdrop" onclick="toggleSubmenuDrawer(false)" class="fixed inset-0 bg-black/50 backdrop-blur-xs z-50 hidden transition-opacity"></div>
-  <aside id="submenuDrawer" class="fixed top-0 bottom-0 right-0 w-full max-w-md bg-white dark:bg-rx-950 text-rx-900 dark:text-rx-50 z-50 shadow-2xl transform translate-x-full transition-transform duration-300 flex flex-col">
+  <aside id="submenuDrawer" class="fixed top-0 bottom-0 right-0 w-[92vw] sm:w-full max-w-md max-h-[100dvh] bg-white dark:bg-rx-950 text-rx-900 dark:text-rx-50 z-50 shadow-2xl transform translate-x-full transition-transform duration-300 flex flex-col">
     <!-- Drawer Header: Circular Close Button on Left, Brand Title on Right (matching image_ff7ad7.jpg) -->
     <div class="px-6 py-5 flex items-center justify-between border-b border-rx-100 dark:border-rx-800">
       <button type="button" onclick="toggleSubmenuDrawer(false)" class="w-10 h-10 rounded-full bg-[#7A6536] hover:bg-rx-600 text-white flex items-center justify-center shadow transition" title="إغلاق القائمة">
@@ -307,8 +321,8 @@
         </div>
 
         <!-- Prominent Filter & Sort Button (Exact Olive/Gold & Rose style from image_ff7ad7.jpg) -->
-        <div class="flex flex-wrap items-center gap-3">
-          <button type="button" onclick="toggleFilterPanel()" class="flex items-center justify-center gap-3 px-6 py-2.5 rounded-md bg-[#7A6536] hover:bg-[#63512A] text-white font-semibold text-sm shadow transition">
+        <div class="flex flex-wrap items-center justify-between sm:justify-end gap-2.5 w-full sm:w-auto">
+          <button type="button" onclick="toggleFilterPanel()" class="flex-1 sm:flex-initial flex items-center justify-center gap-2.5 px-5 sm:px-6 py-2.5 rounded-md bg-[#7A6536] hover:bg-[#63512A] text-white font-semibold text-xs sm:text-sm shadow transition">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"/>
             </svg>
@@ -446,20 +460,20 @@
 
     <!-- Admin Navigation Tabs -->
     <div class="flex items-center gap-2 overflow-x-auto custom-scroll bg-white dark:bg-rx-900 p-2 rounded-xl border border-rx-200 dark:border-rx-800 shadow-sm">
-      <button type="button" onclick="switchAdminTab('orders')" id="adminTabBtn_orders" class="px-4 py-2.5 rounded-lg font-bold text-xs sm:text-sm transition flex items-center gap-2 bg-rx-600 text-white shadow-sm">
+      <button type="button" onclick="switchAdminTab('orders')" id="adminTabBtn_orders" class="whitespace-nowrap shrink-0 px-3.5 sm:px-4 py-2.5 rounded-lg font-bold text-xs sm:text-sm transition flex items-center gap-2 bg-rx-600 text-white shadow-sm">
         <span>📦</span>
         <span>إدارة الطلبات والعمليات (Orders)</span>
         <span id="adminPendingOrdersBadge" class="px-2 py-0.5 text-xs rounded-full bg-white/20">0</span>
       </button>
-      <button type="button" onclick="switchAdminTab('items')" id="adminTabBtn_items" class="px-4 py-2.5 rounded-lg font-bold text-xs sm:text-sm transition flex items-center gap-2 text-rx-800 dark:text-rx-200 hover:bg-rx-100 dark:hover:bg-rx-800">
+      <button type="button" onclick="switchAdminTab('items')" id="adminTabBtn_items" class="whitespace-nowrap shrink-0 px-3.5 sm:px-4 py-2.5 rounded-lg font-bold text-xs sm:text-sm transition flex items-center gap-2 text-rx-800 dark:text-rx-200 hover:bg-rx-100 dark:hover:bg-rx-800">
         <span>🧴</span>
         <span>الأصناف وأسعار البيع والجملة (Items)</span>
       </button>
-      <button type="button" onclick="switchAdminTab('categories')" id="adminTabBtn_categories" class="px-4 py-2.5 rounded-lg font-bold text-xs sm:text-sm transition flex items-center gap-2 text-rx-800 dark:text-rx-200 hover:bg-rx-100 dark:hover:bg-rx-800">
+      <button type="button" onclick="switchAdminTab('categories')" id="adminTabBtn_categories" class="whitespace-nowrap shrink-0 px-3.5 sm:px-4 py-2.5 rounded-lg font-bold text-xs sm:text-sm transition flex items-center gap-2 text-rx-800 dark:text-rx-200 hover:bg-rx-100 dark:hover:bg-rx-800">
         <span>🗂️</span>
         <span>الأقسام والقائمة الفرعية (Categories & Submenu)</span>
       </button>
-      <button type="button" onclick="switchAdminTab('settings')" id="adminTabBtn_settings" class="px-4 py-2.5 rounded-lg font-bold text-xs sm:text-sm transition flex items-center gap-2 text-rx-800 dark:text-rx-200 hover:bg-rx-100 dark:hover:bg-rx-800">
+      <button type="button" onclick="switchAdminTab('settings')" id="adminTabBtn_settings" class="whitespace-nowrap shrink-0 px-3.5 sm:px-4 py-2.5 rounded-lg font-bold text-xs sm:text-sm transition flex items-center gap-2 text-rx-800 dark:text-rx-200 hover:bg-rx-100 dark:hover:bg-rx-800">
         <span>⚡</span>
         <span>إعدادات المتجر والشحن والخصم (Settings)</span>
       </button>
@@ -474,8 +488,8 @@
             <p class="text-xs text-rx-600 dark:text-rx-300">تحديث حالات التجهيز والشحن، تعيين شركة التوصيل وبوليصة الشحن، ومتابعة تكلفة الجملة وصافي الربح لكل طلب</p>
           </div>
           <div class="flex flex-wrap items-center gap-2">
-            <input id="adminOrderSearchInput" type="text" oninput="renderAdminOrders()" placeholder="بحث برقم الطلب، اسم العميل، الهاتف، المحافظة..." class="px-3 py-2 rounded-lg border border-rx-200 dark:border-rx-700 bg-rx-50 dark:bg-rx-950 text-xs sm:text-sm w-64" />
-            <select id="adminOrderStatusFilter" onchange="renderAdminOrders()" class="px-3 py-2 rounded-lg border border-rx-200 dark:border-rx-700 bg-rx-50 dark:bg-rx-950 text-xs sm:text-sm font-semibold">
+            <input id="adminOrderSearchInput" type="text" oninput="renderAdminOrders()" placeholder="بحث برقم الطلب، اسم العميل، الهاتف، المحافظة..." class="px-3 py-2 rounded-lg border border-rx-200 dark:border-rx-700 bg-rx-50 dark:bg-rx-950 text-xs sm:text-sm w-full sm:w-64" />
+            <select id="adminOrderStatusFilter" onchange="renderAdminOrders()" class="px-3 py-2 rounded-lg border border-rx-200 dark:border-rx-700 bg-rx-50 dark:bg-rx-950 text-xs sm:text-sm font-semibold w-full sm:w-auto">
               <option value="all">جميع الحالات (All Statuses)</option>
               <option value="Pending">⏳ جديد / قيد المراجعة (Pending)</option>
               <option value="Processing">⚙️ جاري التجهيز والتعبئة (Processing)</option>
@@ -487,8 +501,8 @@
         </div>
 
         <!-- Orders Table -->
-        <div class="overflow-x-auto custom-scroll">
-          <table class="w-full text-start border-collapse text-xs sm:text-sm">
+        <div class="overflow-x-auto custom-scroll responsive-table-wrap rounded-xl border border-rx-100 dark:border-rx-800/60">
+          <table class="w-full min-w-[820px] text-start border-collapse text-xs sm:text-sm">
             <thead>
               <tr class="bg-rx-50 dark:bg-rx-950 text-rx-700 dark:text-rx-300 border-y border-rx-200 dark:border-rx-800">
                 <th class="py-3 px-3 text-start">رقم الطلب والتاريخ</th>
@@ -519,8 +533,8 @@
             <p class="text-xs text-rx-600 dark:text-rx-300">تحكم كامل في كل عطر، مكوناته، سعر البيع للجمهور، سعر الجملة/التكلفة، هامش الربح، والمخزون</p>
           </div>
           <div class="flex flex-wrap items-center gap-2">
-            <input id="adminItemSearchInput" type="text" oninput="renderAdminItems()" placeholder="ابحث عن اسم العطر أو الوصف..." class="px-3 py-2 rounded-lg border border-rx-200 dark:border-rx-700 bg-rx-50 dark:bg-rx-950 text-xs sm:text-sm w-60" />
-            <select id="adminItemCategoryFilter" onchange="renderAdminItems()" class="px-3 py-2 rounded-lg border border-rx-200 dark:border-rx-700 bg-rx-50 dark:bg-rx-950 text-xs sm:text-sm font-semibold">
+            <input id="adminItemSearchInput" type="text" oninput="renderAdminItems()" placeholder="ابحث عن اسم العطر أو الوصف..." class="px-3 py-2 rounded-lg border border-rx-200 dark:border-rx-700 bg-rx-50 dark:bg-rx-950 text-xs sm:text-sm w-full sm:w-60" />
+            <select id="adminItemCategoryFilter" onchange="renderAdminItems()" class="px-3 py-2 rounded-lg border border-rx-200 dark:border-rx-700 bg-rx-50 dark:bg-rx-950 text-xs sm:text-sm font-semibold w-full sm:w-auto">
               <option value="all">كل الأقسام</option>
               <option value="men">عطور رجالية</option>
               <option value="women">عطور نسائية</option>
@@ -532,8 +546,8 @@
           </div>
         </div>
 
-        <div class="overflow-x-auto custom-scroll">
-          <table class="w-full text-start border-collapse text-xs sm:text-sm">
+        <div class="overflow-x-auto custom-scroll responsive-table-wrap rounded-xl border border-rx-100 dark:border-rx-800/60">
+          <table class="w-full min-w-[820px] text-start border-collapse text-xs sm:text-sm">
             <thead>
               <tr class="bg-rx-50 dark:bg-rx-950 text-rx-700 dark:text-rx-300 border-y border-rx-200 dark:border-rx-800">
                 <th class="py-3 px-3 text-start">العطر والوصف</th>
@@ -634,7 +648,7 @@
   <!-- CART SLIDE-OVER DRAWER & CHECKOUT MODAL                               -->
   <!-- ===================================================================== -->
   <div id="cartBackdrop" onclick="toggleCartDrawer(false)" class="fixed inset-0 bg-black/50 backdrop-blur-xs z-50 hidden"></div>
-  <aside id="cartDrawer" class="fixed top-0 bottom-0 left-0 w-full max-w-md bg-white dark:bg-rx-950 text-rx-900 dark:text-rx-50 z-50 shadow-2xl transform -translate-x-full transition-transform duration-300 flex flex-col">
+  <aside id="cartDrawer" class="fixed top-0 bottom-0 left-0 w-[92vw] sm:w-full max-w-md max-h-[100dvh] bg-white dark:bg-rx-950 text-rx-900 dark:text-rx-50 z-50 shadow-2xl transform -translate-x-full transition-transform duration-300 flex flex-col">
     <div class="px-5 py-4 border-b border-rx-100 dark:border-rx-800 flex items-center justify-between bg-rx-50/70 dark:bg-rx-900">
       <div class="flex items-center gap-2">
         <span class="text-lg">🛍️</span>
@@ -693,7 +707,7 @@
 
   <!-- 1. Checkout Modal -->
   <div id="checkoutModal" class="fixed inset-0 bg-black/60 backdrop-blur-xs z-50 hidden items-center justify-center p-4">
-    <div class="bg-white dark:bg-rx-900 rounded-2xl max-w-lg w-full p-6 border border-rx-200 dark:border-rx-700 shadow-2xl max-h-[90vh] overflow-y-auto custom-scroll animate-fade-in">
+    <div class="bg-white dark:bg-rx-900 rounded-2xl max-w-lg w-full p-6 border border-rx-200 dark:border-rx-700 shadow-2xl max-h-[90dvh] p-4 sm:p-6 overflow-y-auto custom-scroll animate-fade-in">
       <div class="flex items-center justify-between pb-3 border-b border-rx-100 dark:border-rx-800">
         <h3 class="text-lg font-extrabold text-rx-900 dark:text-white">إتمام الطلب والشحن — SHEIN Rx</h3>
         <button type="button" onclick="closeCheckoutModal()" class="w-8 h-8 rounded-full bg-rx-100 dark:bg-rx-800 flex items-center justify-center">✕</button>
@@ -756,7 +770,7 @@
 
   <!-- 2. Admin Add/Edit Perfume Item Modal (Includes Sale Price, Wholesale Price, Descriptions, Olfactory Notes) -->
   <div id="productFormModal" class="fixed inset-0 bg-black/60 backdrop-blur-xs z-50 hidden items-center justify-center p-4">
-    <div class="bg-white dark:bg-rx-900 rounded-2xl max-w-2xl w-full p-6 border border-rx-200 dark:border-rx-700 shadow-2xl max-h-[92vh] overflow-y-auto custom-scroll animate-fade-in">
+    <div class="bg-white dark:bg-rx-900 rounded-2xl max-w-2xl w-full p-6 border border-rx-200 dark:border-rx-700 shadow-2xl max-h-[92dvh] p-4 sm:p-6 overflow-y-auto custom-scroll animate-fade-in">
       <div class="flex items-center justify-between pb-3 border-b border-rx-100 dark:border-rx-800">
         <h3 id="productModalTitle" class="text-lg font-extrabold text-rx-900 dark:text-white">إضافة / تعديل بيانات العطر والتسعير</h3>
         <button type="button" onclick="closeProductModal()" class="w-8 h-8 rounded-full bg-rx-100 dark:bg-rx-800 flex items-center justify-center">✕</button>
@@ -866,14 +880,14 @@
 
   <!-- 3. Product Quick-View Modal (For Clients to inspect olfactory pyramid, wholesale bulk info & reviews) -->
   <div id="quickViewModal" class="fixed inset-0 bg-black/60 backdrop-blur-xs z-50 hidden items-center justify-center p-4">
-    <div id="quickViewModalBody" class="bg-white dark:bg-rx-900 rounded-2xl max-w-2xl w-full p-6 border border-rx-200 dark:border-rx-700 shadow-2xl max-h-[90vh] overflow-y-auto custom-scroll animate-fade-in">
+    <div id="quickViewModalBody" class="bg-white dark:bg-rx-900 rounded-2xl max-w-2xl w-full p-6 border border-rx-200 dark:border-rx-700 shadow-2xl max-h-[90dvh] p-4 sm:p-6 overflow-y-auto custom-scroll animate-fade-in">
       <!-- Populated dynamically via openQuickView(id) -->
     </div>
   </div>
 
   <!-- 4. Operations Manager Order Detail & Invoice Modal -->
   <div id="orderInvoiceModal" class="fixed inset-0 bg-black/60 backdrop-blur-xs z-50 hidden items-center justify-center p-4">
-    <div id="orderInvoiceModalBody" class="bg-white dark:bg-rx-900 rounded-2xl max-w-2xl w-full p-6 border border-rx-200 dark:border-rx-700 shadow-2xl max-h-[90vh] overflow-y-auto custom-scroll animate-fade-in">
+    <div id="orderInvoiceModalBody" class="bg-white dark:bg-rx-900 rounded-2xl max-w-2xl w-full p-6 border border-rx-200 dark:border-rx-700 shadow-2xl max-h-[90dvh] p-4 sm:p-6 overflow-y-auto custom-scroll animate-fade-in">
       <!-- Populated dynamically via openOrderDetailsModal(orderId) -->
     </div>
   </div>
@@ -1039,7 +1053,7 @@
   </button>
 
   <!-- TOAST NOTIFICATION BANNER -->
-  <div id="toastBanner" class="fixed bottom-5 right-5 z-50 hidden px-4 py-3 rounded-xl bg-rx-900 text-white text-xs sm:text-sm font-bold shadow-2xl border border-rx-500 items-center gap-2.5 animate-fade-in">
+  <div id="toastBanner" class="fixed bottom-16 sm:bottom-5 inset-x-3 sm:inset-x-auto sm:right-5 sm:max-w-md z-50 hidden px-4 py-3 rounded-xl bg-rx-900 text-white text-xs sm:text-sm font-bold shadow-2xl border border-rx-500 items-center gap-2.5 animate-fade-in">
     <span id="toastIcon">✨</span>
     <span id="toastMessage">تم تحديث السلة بنجاح</span>
   </div>
@@ -2658,9 +2672,9 @@
         }
         if (btn) {
           if (t === tabName) {
-            btn.className = "px-4 py-2.5 rounded-lg font-bold text-xs sm:text-sm transition flex items-center gap-2 bg-rx-600 text-white shadow-sm";
+            btn.className = "whitespace-nowrap shrink-0 px-3.5 sm:px-4 py-2.5 rounded-lg font-bold text-xs sm:text-sm transition flex items-center gap-2 bg-rx-600 text-white shadow-sm";
           } else {
-            btn.className = "px-4 py-2.5 rounded-lg font-bold text-xs sm:text-sm transition flex items-center gap-2 text-rx-800 dark:text-rx-200 hover:bg-rx-100 dark:hover:bg-rx-800";
+            btn.className = "whitespace-nowrap shrink-0 px-3.5 sm:px-4 py-2.5 rounded-lg font-bold text-xs sm:text-sm transition flex items-center gap-2 text-rx-800 dark:text-rx-200 hover:bg-rx-100 dark:hover:bg-rx-800";
           }
         }
       });
